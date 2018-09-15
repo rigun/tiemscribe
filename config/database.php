@@ -3,9 +3,9 @@ class Database{
  
     // specify your own database credentials
     private $host = "localhost";
-    private $db_name = "id7105604_tiemschedule";
-    private $username = "id7105604_tiemschedule";
-    private $password = "TiEm@Database~18";
+    private $db_name = "thekingc_tiemschedule";
+    private $username = "thekingc";
+    private $password = "Zn@44N#GxuWw73";
     public $conn;
  
     // get the database connection
