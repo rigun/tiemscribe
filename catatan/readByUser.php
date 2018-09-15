@@ -1,11 +1,4 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: GET");
-header("Access-Control-Allow-Credentials: true");
-header('Content-Type: application/json');
- 
-// include database and object files
 include_once '../config/database.php';
 include_once '../objects/catatan.php';
  
@@ -17,7 +10,7 @@ $db = $database->getConnection();
 $catatan = new Catatan($db);
  
 // set ID property of user to be edited
-$catatan->id= isset($_GET['id']) ? $_GET['id'] : die();
+$catatan->id= $_POST['id'];
 // read the details of user to be edited
 $stmtCatatan = $catatan->readOne();
 $numCatatan = $stmtCatatan->rowCount();

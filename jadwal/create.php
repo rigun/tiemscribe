@@ -1,15 +1,5 @@
 <?php
-// required headers
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
-header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
- 
-// get database connection
 include_once '../config/database.php';
- 
-// instantiate product object
 include_once '../objects/jadwal.php';
  
 $database = new Database();
@@ -17,28 +7,24 @@ $db = $database->getConnection();
  
 $product = new Jadwal($db);
  
-// get posted data
-$data = json_decode(file_get_contents("php://input"));
- 
- 
-$product->jadwal = $data->jadwal;
-$product->waktu = $data->waktu;
-$product->tanggal = $data->tanggal;
-$product->tempat = $data->tempat;
-$product->prioritas = $data->prioritas;
-$product->user_id = $data->user_id;
+$product->jadwal = $_POST["jadwal"];
+$product->waktu = $_POST["waktu"];
+$product->tanggal =$_POST["tanggal"];
+$product->tempat = $_POST["tempat"];
+$product->prioritas = $_POST["prioritas"];
+$product->user_id = $_POST["id"];
 
 // create the product
 if($product->create()){
-    echo '{';
-        echo '"message": "Product was created."';
-    echo '}';
+    $response["value"] = 200;
+    $response["message"] = "Jadwal berhasil ditambahkan";
+    echo json_encode($response);
 }
  
 // if unable to create the product, tell the user
 else{
-    echo '{';
-        echo '"message": "Unable to create jadwal."';
-    echo '}';
+    $response["value"] = 0;
+    $response["message"] = "Coba Lagi";
+    echo json_encode($response);
 }
 ?>
