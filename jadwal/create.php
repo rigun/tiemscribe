@@ -9,7 +9,7 @@ $product = new Jadwal($db);
  
 $product->jadwal = $_POST["jadwal"];
 $product->waktu = $_POST["waktu"];
-$product->tanggal = date('Y-m-d',$_POST["tanggal"]);
+$product->tanggal = date_format('d/m/Y',$_POST["tanggal"]);
 $product->tempat = $_POST["tempat"];
 $product->prioritas = $_POST["prioritas"];
 $product->user_id = $_POST["id"];
