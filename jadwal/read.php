@@ -1,8 +1,4 @@
 <?php
-// required headers
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
- 
 // include database and object files
 include_once '../config/database.php';
 include_once '../objects/jadwal.php';
@@ -23,7 +19,7 @@ if($num>0){
  
     // products array
     $products_arr=array();
-    $products_arr["records"]=array();
+    $products_arr["result"]=array();
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
@@ -36,22 +32,17 @@ if($num>0){
             "tanggal" => $tanggal,
             "tempat" => $tempat,
             "prioritas" => $prioritas,
-            "user_id" => $user_id,
          );
          
-         // "description" => html_entity_decode($description),
-   
-
- 
-        array_push($products_arr["records"], $product_item);
+        array_push($products_arr["result"], $product_item);
     }
  
     echo json_encode($products_arr);
 }
  
 else{
-    echo json_encode(
-        array("message" => "No jadwal found.")
-    );
+    $response["value"] = 0;
+    $response["message"] = "Jadwal Tidak ditemukan";
+    echo json_encode($response);
 }
 ?>
