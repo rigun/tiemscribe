@@ -393,14 +393,13 @@ class User{
                     FROM
                         " . $this->table_name . " 
                     WHERE
-                        email LIKE ? ";
+                        email = ? ";
         
             // prepare query statement
             $stmt = $this->conn->prepare($query);
         
             // sanitize
             $keywords=htmlspecialchars(strip_tags($keywords));
-            $keywords = "%{$keywords}%";
         
             // bind
             $stmt->bindParam(1, $keywords);
