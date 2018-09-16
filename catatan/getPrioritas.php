@@ -35,7 +35,7 @@ if($numCatatan>0){
 }
 else{
     $response["value"] = 0;
-    $response["message"] = "Catatan Tidak ditemukan";
+    $response["message"] = "Catatan Anda Tidak ditemukan";
     $response["result"] = [];
     echo json_encode($response);
 }
