@@ -1,6 +1,6 @@
 <?php
 include_once '../config/database.php';
-include_once '../objects/catatan.php';
+include_once '../objects/jadwal.php';
  
 // get database connection
 $database = new Database();
