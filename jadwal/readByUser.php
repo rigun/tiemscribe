@@ -31,13 +31,13 @@ if($num>0){
             "waktu" => $waktu,
             "tanggal" => $tanggal,
             "tempat" => $tempat,
-            "prioritas" => $prioritas,
+            "prioritas" => $prioritas
          );
          
         array_push($products_arr["result"], $product_item);
     }
  
-    echo json_encode($products_arr);
+    print_r(json_encode($products_arr));
 }
  
 else{
