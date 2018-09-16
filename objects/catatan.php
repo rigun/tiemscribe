@@ -74,7 +74,7 @@ class Catatan{
         $query = "UPDATE
                     " . $this->table_name . "
                 SET
-                catatan=:catatan, prioritas=:prioritas, user_id=:user_id
+                catatan=:catatan, prioritas=:prioritas
                 WHERE
                     id=:id";
     
@@ -83,13 +83,11 @@ class Catatan{
     
         $this->catatan=htmlspecialchars(strip_tags($this->catatan));
         $this->prioritas=htmlspecialchars(strip_tags($this->prioritas));
-        $this->user_id=htmlspecialchars(strip_tags($this->user_id));
         $this->id=htmlspecialchars(strip_tags($this->id));
 
         // bind values
         $stmt->bindParam(":catatan", $this->catatan);
         $stmt->bindParam(":prioritas", $this->prioritas);
-        $stmt->bindParam(":user_id", $this->user_id);
         $stmt->bindParam(":id", $this->id);
     
         // execute the query
