@@ -142,4 +142,25 @@ class Catatan{
         return $stmt;
        
     }
+    function readPrioritas(){
+        // query to read single record
+      $query = "SELECT
+                  *
+              FROM
+                  " . $this->table_name . "
+              WHERE
+                  user_id = ? AND prioritas = 1";
+
+          // prepare query statement
+          $stmt = $this->conn->prepare( $query );
+
+          // bind id of product to be updated
+          $stmt->bindParam(1, $this->id);
+
+          // execute query
+          $stmt->execute();
+
+      return $stmt;
+     
+  }
 }
