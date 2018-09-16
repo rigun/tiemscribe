@@ -32,6 +32,7 @@ if($num>0){
             "tanggal" => $tanggal,
             "tempat" => $tempat,
             "prioritas" => $prioritas,
+            "user_id" => $user_id
          );
          
         array_push($products_arr["result"], $product_item);

@@ -39,7 +39,6 @@ if($num>0){
  
     print_r(json_encode($products_arr));
 }
- 
 else{
     $response["value"] = 0;
     $response["message"] = "Jadwal Tidak ditemukan";
