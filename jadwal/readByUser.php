@@ -15,6 +15,7 @@ $product->id= $_POST['id'];
 $stmt = $product->readOne();
 $num = $stmt->rowCount();
 
+// check if more than 0 record found
 if($num>0){
  
     // products array
@@ -37,12 +38,12 @@ if($num>0){
         array_push($products_arr["result"], $product_item);
     }
  
-    print_r(json_encode($products_arr));
+    echo json_encode($products_arr);
 }
+ 
 else{
     $response["value"] = 0;
     $response["message"] = "Jadwal Tidak ditemukan";
-    $response["result"] = [];
     echo json_encode($response);
 }
 ?>
