@@ -44,6 +44,7 @@ if($num>0){
 else{
     $response["value"] = 0;
     $response["message"] = "Jadwal Tidak ditemukan";
+    $response["result"] = [];
     echo json_encode($response);
 }
 ?>
