@@ -17,7 +17,7 @@ $product->user_id = $_POST["id"];
 // create the product
 if($product->create()){
     $response["value"] = 200;
-    $response["message"] = "Jadwal berhasil ditambahkan";
+    $response["message"] = $_POST["tanggal"];
     echo json_encode($response);
 }
  
