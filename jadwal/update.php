@@ -1,12 +1,5 @@
 <?php
-// required headers
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: PUT, PATCH, POST");
-header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
- 
-// include database and object files
+
 include_once '../config/database.php';
 include_once '../objects/jadwal.php';
  
@@ -17,32 +10,29 @@ $db = $database->getConnection();
 // prepare product object
 $product = new Jadwal($db);
  
-// get id of product to be edited
-$data = json_decode(file_get_contents("php://input"));
- 
-// set ID property of product to be edited
-$product->id = isset($_GET['id']) ? $_GET['id'] : die();
+$product->id = $_POST["id"];
  
 // set product property values
  
-$product->jadwal = $data->jadwal;
-$product->waktu = $data->waktu;
-$product->tanggal = $data->tanggal;
-$product->tempat = $data->tempat;
-$product->prioritas = $data->prioritas;
-$product->user_id = $data->user_id;
+$product->jadwal = $_POST["jadwal"];
+$product->waktu = $_POST["waktu"];
+$time = strtotime($_POST["tanggal"]);
+$newformat = date('Y-m-d',$time);
+$product->tanggal = $newformat;
+$product->tempat = $_POST["tempat"];
+$product->prioritas = $_POST["prioritas"];
 
 // update the product
 if($product->update()){
-    echo '{';
-        echo '"message": "Product was updated."';
-    echo '}';
+    $response["value"] = 200;
+    $response["message"] = "Jadwal berhasil Ubah";
+    echo json_encode($response);
 }
  
 // if unable to update the product, tell the user
 else{
-    echo '{';
-        echo '"message": "Unable to update product."';
-    echo '}';
+    $response["value"] = o;
+    $response["message"] = "Coba Lagi";
+    echo json_encode($response);
 }
 ?>

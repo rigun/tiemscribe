@@ -17,10 +17,8 @@ $numCatatan = $stmtCatatan->rowCount();
 
 // create array
 if($numCatatan>0){
- 
-    // products array
     $catatan_arr=array();
-    $catatan_arr["catatan"]=array();
+    $catatan_arr["result"]=array();
 
     while ($rowCatatan = $stmtCatatan->fetch(PDO::FETCH_ASSOC)){
 
@@ -31,14 +29,13 @@ if($numCatatan>0){
             "id" => $id
          );
          
-        array_push($catatan_arr["catatan"], $product_item);
+        array_push($catatan_arr["result"], $product_item);
     }
+    print_r(json_encode($catatan_arr));
 }
 else{
-    $catatan_arr["catatan"]=null;
+    $response["value"] = 0;
+    $response["message"] = "Catatan Tidak ditemukan";
+    echo json_encode($response);
 }
-
- 
-// make it json format
-print_r(json_encode($user_arr));
 ?>
