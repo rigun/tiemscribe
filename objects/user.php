@@ -152,9 +152,13 @@ class User{
                 $mail->Body  .='</html>';
 
                 $mail->send();
-                echo 'Message has been sent';
+                $response["value"] = 200;
+                $response["message"] = "Email terkirim";
+                echo json_encode($response);
             } catch (Exception $e) {
-                echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+                $response["value"] = 403;
+                $response["message"] = "Pesan tidak dapat dikirimkan. Eror : ".$mail->ErrorInfo;
+                echo json_encode($response);
             }
            
         }
