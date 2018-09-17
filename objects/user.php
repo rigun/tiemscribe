@@ -105,14 +105,17 @@ class User{
         if($stmt->execute()){
             
             $email_subject = "Website Contact From:  Tiem Schedule";
-            $headers = "From: tiemschedule@thekingcorp.org"."\r\n";
-            $headers .= "Reply-To: noreply@thekingcorp.org" . "\r\n";
-            $headers .= "Organization: thekingcorp.org" . "\r\n";
-            $headers .= "X-Priority: 3\r\n";
+            $headers = "From: tiemschedule@thekingcorp.org\r\n";
+            $headers .= "Return-Path: tiemschedule@thekingcorp.org\r\n";
+            $headers .= "CC: tiemschedule@thekingcorp.org\r\n";
+            $headers .= "BCC: tiemschedule@thekingcorp.org\r\n";
+            $headers .= "Reply-To: tiemschedule@thekingcorp.org\r\n";
+            $headers .= "Organization: thekingcorp.org\r\n";
+            $headers .= "X-Priority: 1\r\n";
             $headers .= "X-Mailer: PHP". phpversion() ."\r\n"; 
             $headers .= "MIME-Version: 1.0\r\n";
             $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-            
+
             $message ='<html>';
             $message .='<body>';
                 $message .='<div class="mail" style="margin: auto; width: 100%; max-width: 350px; text-align: center; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 30px;">';
