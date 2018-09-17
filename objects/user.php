@@ -128,7 +128,7 @@ class User{
                     $message .='</div>';
                     $message .='<div class="mail-footer" style="color: black; background-color: #adadad; width: 100%; font-size: 20px;padding: 20px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;">';
                         $message .='Apabila link tersebut bermasalah, silahkan akses url berikut:';
-                        $message .='https://tiemschedule.thekingcorp.org/mail/verifikasiEmail.php?token='.$this->token;
+                        $message .='https://tiemschedule.thekingcorp.org/mail/verifikasiEmail.php?token='.$this->token.'';
                     $message .='</div>';
                 $message .='</div>';
             $message .='</body>';
