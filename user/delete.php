@@ -13,15 +13,15 @@ $product->id = $_POST["id"];
  
 // delete the product
 if($product->delete()){
-    echo '{';
-        echo '"message": "User berhasil di hapus"';
-    echo '}';
+    $response["value"] = 200;
+    $response["message"] = "Delete berhasil";
+    echo json_encode($response);
 }
  
 // if unable to delete the product
 else{
-    echo '{';
-        echo '"message": "Gagal Menghapus User"';
-    echo '}';
+    $response["value"] = 0;
+    $response["message"] = "Delete gagal";
+    echo json_encode($response);
 }
 ?>
