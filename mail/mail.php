@@ -12,8 +12,11 @@ $token = strip_tags(htmlspecialchars($_POST['token']));
 
 
 $email_subject = "Website Contact From:  Tiem Schedule";
-$headers = "From: tiemschedule@tiematweb18.000webhostapp.com"."\r\n";
-$headers .= "Reply-To:noreply@tiematweb18.000webhostapp.com" . "\r\n";
+$headers = "From: tiemschedule@thekingcorp.org"."\r\n";
+$headers .= "Reply-To: noreply@thekingcorp.org" . "\r\n";
+$headers .= "Organization: thekingcorp.org" . "\r\n";
+$headers .= "X-Priority: 3\r\n";
+$headers .= "X-Mailer: PHP". phpversion() ."\r\n"; 
 $headers .= "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
