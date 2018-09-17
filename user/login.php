@@ -18,6 +18,7 @@ $product->password = $_POST["password"];
 
 if($product->login()){
     $response["id"] = $product->id;
+    $response["nama"] = $product->nama;
      $response["value"] = 200;
    $response["message"] = "Selamat Datang";
    echo json_encode($response);
