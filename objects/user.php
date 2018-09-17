@@ -124,7 +124,7 @@ class User{
 
                 //Recipients
                 $mail->setFrom('tiemschedule@thekingcorp.org', 'Tiem Schedule');
-                $mail->addAddress('ellen@thekingcorp.org');               // Name is optional
+                $mail->addAddress($this->email);               // Name is optional
                 $mail->addReplyTo('noreply@thekingcorp.org', 'noreply');
                 $mail->addCC('tiemschedule@thekingcorp.org');
                 $mail->addBCC('tiemschedule@thekingcorp.org');
@@ -143,8 +143,8 @@ class User{
                             $mail->Body  .='<h1>Hallo '.$this->nama.', Silahkan lakukan verifikasi email anda dengan menekan tombol berikut </h1>';
                             $mail->Body  .='<a href="https://tiemschedule.thekingcorp.org/mail/verifikasiEmail.php?token='.$this->token.'"><button style="background-image: linear-gradient(to left, #0025BC , #0071BC); width: 100%; text-align: center; margin: auto; min-height: 40px; color: white; font-size: 30px; cursor: pointer;">Klik disini</button></a>';
                         $mail->Body  .='</div>';
-                        $mail->Body  .='<div class="mail-footer" style="color: black; background-color: #adadad; width: 100%; font-size: 20px;padding: 20px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;">';
-                            $mail->Body  .='Apabila link tersebut bermasalah, silahkan akses url berikut:';
+                        $mail->Body  .='<div class="mail-footer" style="color: black; background-color: #adadad; width: 100%; font-size: 20px;padding: 20px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;" >';
+                            $mail->Body  .='<p>Apabila link tersebut bermasalah, silahkan akses url berikut: </p><br/>';
                             $mail->Body  .='https://tiemschedule.thekingcorp.org/mail/verifikasiEmail.php?token='.$this->token.'';
                         $mail->Body  .='</div>';
                     $mail->Body  .='</div>';
