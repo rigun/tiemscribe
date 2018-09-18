@@ -162,42 +162,6 @@ class User{
         return false;
         
     }
-    function mail(){
-        $email_subject = "Website Contact From:  Tiem Schedule";
-
-        $headers = "From: tiemschedule@thekingcorp.org\r\n";
-        $headers .= "Return-Path: tiemschedule@thekingcorp.org\r\n";
-        $headers .= "CC: tiemschedule@thekingcorp.org\r\n";
-        $headers .= "BCC: tiemschedule@thekingcorp.org\r\n";
-        $headers .= "Reply-To: tiemschedule@thekingcorp.org\r\n";
-        $headers .= "Organization: thekingcorp.org\r\n";
-        $headers .= "X-Priority: 1\r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-        $message ='<html>';
-        $message .='<body>';
-            $message .='<div class="mail" style="margin: auto; width: 100%; max-width: 350px; text-align: center; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 30px;">';
-                $message .='<div class="mail-header" style="color: white; background-color: #003365; width: 100%; font-size: 20px; padding: 20px; border-top-left-radius: 25px; border-top-right-radius: 25px;">';
-                    $message .='<strong>VERIFIKASI EMAIL DARI <br/>TIEM SCHEDULE</strong>';
-                $message .='</div>';
-                $message .='<div class="mail-body" style="color: black; background-color:  #CFE7EA; width: 100%; padding: 20px;">';
-                    $message .='<h1>Hallo '.$this->nama.', Silahkan lakukan verifikasi email anda dengan menekan tombol berikut </h1>';
-                    $message .='<a href="https://tiemschedule.thekingcorp.org/mail/verifikasiEmail.php?token='.$this->token.'"><button style="background-image: linear-gradient(to left, #0025BC , #0071BC); width: 100%; text-align: center; margin: auto; min-height: 40px; color: white; font-size: 30px; cursor: pointer;">Klik disini</button></a>';
-                $message .='</div>';
-                $message .='<div class="mail-footer" style="color: black; background-color: #adadad; width: 100%; font-size: 20px;padding: 20px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;">';
-                    $message .='Apabila link tersebut bermasalah, silahkan akses url berikut:';
-                    $message .='https://tiemschedule.thekingcorp.org/mail/verifikasiEmail.php?token='.$this->token.'';
-                $message .='</div>';
-            $message .='</div>';
-        $message .='</body>';
-        $message .='</html>';
-        if(mail($this->email,$email_subject,$message,$headers)){
-            return true; 
-        }else{
-            return false;
-        }
-    }
     function readOne(){
  
         // query to read single record
@@ -250,26 +214,18 @@ class User{
         $query = "UPDATE
                     " . $this->table_name . "
                 SET
-                    email=:email, nama=:nama, foto=:foto, ttl=:ttl, kutipan=:kutipan
+                    nama=:nama
                 WHERE
                     id=:id";
     
         // prepare query statement
         $stmt = $this->conn->prepare($query);
     
-        $this->email=htmlspecialchars(strip_tags($this->email));
         $this->nama=htmlspecialchars(strip_tags($this->nama));
-        $this->foto=htmlspecialchars(strip_tags($this->foto));
-        $this->ttl=htmlspecialchars(strip_tags($this->ttl));
-        $this->kutipan=htmlspecialchars(strip_tags($this->kutipan));
         $this->id=htmlspecialchars(strip_tags($this->id));
 
         // bind values
-        $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":nama", $this->nama);
-        $stmt->bindParam(":foto", $this->foto);
-        $stmt->bindParam(":ttl", $this->ttl);
-        $stmt->bindParam(":kutipan", $this->kutipan);
         $stmt->bindParam(":id", $this->id);
     
         // execute the query
