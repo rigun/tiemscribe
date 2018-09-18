@@ -38,7 +38,6 @@ else{
        $response["message"] = "Pendaftaran berhasil";
        echo json_encode($response);
     }
-     
     // if unable to create the product, tell the user
     else{
         $response["value"] = 403;

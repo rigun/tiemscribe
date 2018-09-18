@@ -113,7 +113,7 @@ class User{
         if($stmt->execute()){
             $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
             try {
-                $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+                $mail->SMTPDebug = 0;                                 // Enable verbose debug output
                 $mail->isSMTP();                                      // Set mailer to use SMTP
                 $mail->Host = 'kakuna.rapidplex.com;www.thekingcorp.org';  // Specify main and backup SMTP servers
                 $mail->SMTPAuth = true;                               // Enable SMTP authentication
