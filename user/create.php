@@ -13,7 +13,8 @@ $product = new User($db);
  
 $product->nama = $_POST["nama"];
 $product->email = $_POST["email"];
-$product->password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+// $product->password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+$product->password = $_POST["password"];
 $product->foto = NULL;
 $product->status = 0;
 $product->token = bin2hex(random_bytes(5));
