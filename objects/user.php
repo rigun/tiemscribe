@@ -235,6 +235,8 @@ class User{
     
         return false;
     }
+    
+
 
     function updateWithPassword(){
           // update query
@@ -368,6 +370,49 @@ class User{
         }
     
         return false;
+    }
+    function updatePasswordById(){
+
+            $sql = "SELECT password FROM " . $this->table_name . " WHERE id = ?";
+
+           $stmtP = $this->conn->prepare( $sql );
+
+           $stmtP->bindParam(1, $this->id);
+
+           $stmtP->execute();
+
+           $row = $stmtP->fetch(PDO::FETCH_ASSOC);
+           $this->password=htmlspecialchars(strip_tags($this->password));
+         if(password_verify( $this->passwordL,$row['password'] )){
+           $query = "UPDATE
+                   " . $this->table_name . "
+               SET
+                    password=:password
+               WHERE
+                   id=:id";
+
+           // prepare query statement
+           $stmt = $this->conn->prepare($query);
+
+           $this->password=htmlspecialchars(strip_tags($this->password));
+           $this->id=htmlspecialchars(strip_tags($this->id));
+
+           // bind values
+           $stmt->bindParam(":password", password_hash($this->password,PASSWORD_DEFAULT));
+           $stmt->bindParam(":id", $this->id);
+
+           // execute the query
+           if($stmt->execute()){
+           return true;
+           }
+
+           return false;  
+           
+         }else{
+           return false;
+           
+         }
+    
     }
     // delete the product
         function delete(){
