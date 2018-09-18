@@ -555,5 +555,26 @@ class User{
             
           }
         }
+        function login2(){
+            $sql = "SELECT * FROM " . $this->table_name . " WHERE email = ?";
+
+            $stmtP = $this->conn->prepare($sql);
+
+            $stmtP->bindParam(1, $this->email);
+
+            $stmtP->execute();
+
+            if($row = $stmtP->fetch(PDO::FETCH_ASSOC)){
+                $this->id = $row['id'];
+                $this->nama = $row['nama'];
+                $this->status = $row['status'];
+                $this->password = $row["password"];
+                return true;
+            }else{
+                return false;
+            }
+            
+           
+        }
 }
 
