@@ -15,7 +15,7 @@ $product->password = $_POST['password'];
 $product->passwordL = $_POST['passwordL'];
 
 if($product->updatePasswordById()){
-    $response["value"] = 0;
+    $response["value"] = 200;
     $response["message"] = "Password Berhasil di Perbaharui";
     echo json_encode($response);
 }
