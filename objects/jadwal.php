@@ -185,12 +185,13 @@ class Jadwal{
   }
     function readByDate(){
         // query to read single record
+        $today = date("Y-m-d");
       $query = "SELECT
                   *
               FROM
                   " . $this->table_name . "
               WHERE
-                  user_id = ? AND ttl =".date("Y-m-d");
+                  user_id = ? AND tanggal = CURRENT_DATE";
 
           // prepare query statement
           $stmt = $this->conn->prepare( $query );
