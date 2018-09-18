@@ -382,7 +382,7 @@ class User{
            $stmtP->execute();
 
            $row = $stmtP->fetch(PDO::FETCH_ASSOC);
-           $this->password=htmlspecialchars(strip_tags($this->password));
+           $this->passwordL=htmlspecialchars(strip_tags($this->passwordL));
          if(password_verify( $this->passwordL,$row['password'] )){
            $query = "UPDATE
                    " . $this->table_name . "

@@ -12,6 +12,7 @@ $product = new User($db);
  
 $product->id = $_POST['id'];
 $product->password = $_POST['password'];
+$product->passwordL = $_POST['passwordL'];
 
 if($product->updatePasswordById()){
     $response["value"] = 0;
