@@ -557,7 +557,7 @@ class User{
         }
         function login(){
             
-            $sql2 = "SELECT id, nama, status FROM " . $this->table_name . " WHERE email = ?";
+            $sql2 = "SELECT id, nama, status, password FROM " . $this->table_name . " WHERE email = ?";
 
             $stmt = $this->conn->prepare( $sql2 );
 
@@ -571,7 +571,6 @@ class User{
             $this->nama = $row['nama'];
             $this->status = $row['status'];
             $this->password = $row['password'];
-            $this->email = $row['email'];
 
         }
 }

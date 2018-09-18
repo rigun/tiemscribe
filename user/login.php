@@ -13,7 +13,6 @@ $product = new User($db);
  
  
 $product->email = $_POST["email"];
-$product->password = $_POST["password"];
 
 
 if($product->login()){
@@ -21,6 +20,8 @@ if($product->login()){
     $response["nama"] = $product->nama;
      $response["value"] = 200;
      $response["status"] = $product->status;
+     $response["password"] = $product->password;
+     
    $response["message"] = "Selamat Datang";
    echo json_encode($response);
 }
