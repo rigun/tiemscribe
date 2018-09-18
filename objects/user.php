@@ -524,7 +524,7 @@ class User{
         
             return false;
         }
-        function loginB(){
+        function login(){
             $sql = "SELECT password FROM " . $this->table_name . " WHERE email = ?";
 
             $stmtP = $this->conn->prepare($sql);
@@ -554,24 +554,6 @@ class User{
             return false;
             
           }
-        }
-        function login(){
-            
-            $sql2 = "SELECT id, nama, status, password FROM " . $this->table_name . " WHERE email = ?";
-
-            $stmt = $this->conn->prepare( $sql2 );
-
-            $stmt->bindParam(1, $this->email);
-
-            $stmt->execute();
-
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            session_start();
-            $this->id = $row['id'];
-            $this->nama = $row['nama'];
-            $this->status = $row['status'];
-            $this->password = $row['password'];
-
         }
 }
 
