@@ -1,4 +1,11 @@
 <?php
+// required headers
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: PUT, PATCH, POST");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+ 
 // include database and object files
 include_once '../config/database.php';
 include_once '../objects/user.php';
@@ -11,16 +18,16 @@ $db = $database->getConnection();
 $product = new User($db);
  
 $product->token = isset($_GET['token']) ? $_GET['token'] : die();
- 
+echo $product->token;
 
 if($product->resetEmailByToken()){
-    $response["value"] = 200;
-    $response["message"] = "Password berhasil direset dengan password 12345678";
-    echo json_encode($response);
+    echo '{';
+        echo '"message": "Status Berhasil di Update."';
+    echo '}';
 }
 else{
-    $response["value"] = 0;
-    $response["message"] = "Password gagal direset";
-    echo json_encode($response);
+    echo '{';
+        echo '"message": "Gagal Update Status."';
+    echo '}';
 }
 ?>
