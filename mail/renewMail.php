@@ -16,8 +16,8 @@ $db = $database->getConnection();
  
 // prepare product object
 $product = new User($db);
- echo $_GET['token'];
-$product->token = isset($_GET['token']) ? $_GET['token'] : die();
+
+$product->token = $_GET['token'];
 
 if($product->resetEmailByToken()){
     echo '{';
