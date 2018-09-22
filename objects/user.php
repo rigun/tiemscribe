@@ -162,6 +162,107 @@ class User{
         return false;
         
     }
+
+    
+    function sendForgetPassworEmail(){
+    // select all query
+    $query = "SELECT
+                    token
+                FROM
+                " . $this->table_name . " 
+                WHERE email=:email";
+
+                // prepare query statement
+        
+        $stmt = $this->conn->prepare($query);
+        $this->email=htmlspecialchars(strip_tags($this->email));
+
+        $stmt->bindParam(":email", $this->email);
+        // execute query
+        if($stmt->execute()){
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+            // set values to object properties
+            $this->token = $row['token'];
+
+                $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+                try {
+
+                    $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+                    $mail->isSMTP();                                      // Set mailer to use SMTP
+                    $mail->Host = 'kakuna.rapidplex.com;www.thekingcorp.org';  // Specify main and backup SMTP servers
+                    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                    $mail->Username = 'tiemschedule@thekingcorp.org';                 // SMTP username
+                    $mail->Password = 'TiEm@Email~18';                           // SMTP password
+                    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+                    $mail->Port = 465 ;                                    // TCP port to connect to
+
+                    //Recipients
+                    $mail->setFrom('tiemschedule@thekingcorp.org', 'Tiem Schedule');
+                    $mail->addAddress($this->email);               // Name is optional
+                    $mail->addReplyTo('noreply@thekingcorp.org', 'noreply');
+                    $mail->addCC('tiemschedule@thekingcorp.org');
+                    $mail->addBCC('tiemschedule@thekingcorp.org');
+
+
+                    //Content
+                    $mail->isHTML(true);                                  // Set email format to HTML
+                    $mail->Subject = 'Website Contact From:  Tiem Schedule';
+                    $mail->Body  ='<html>';
+                    $mail->Body  .='<body>';
+                        $mail->Body  .='<div class="mail" style="margin: auto; width: 100%; max-width: 350px; text-align: center; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 30px;">';
+                            $mail->Body  .='<div class="mail-header" style="color: white; background-color: #003365; width: 100%; font-size: 20px; padding: 20px; border-top-left-radius: 25px; border-top-right-radius: 25px;">';
+                                $mail->Body  .='<strong>VERIFIKASI EMAIL DARI <br/>TIEM SCHEDULE</strong>';
+                            $mail->Body  .='</div>';
+                            $mail->Body  .='<div class="mail-body" style="color: black; background-color:  #CFE7EA; width: 100%; padding: 20px;">';
+                                $mail->Body  .='<h1>Email ini digunakan untuk mereset password Anda, silahkan klik tombol dibawah untuk melakukan reset password. Abaikan pesan ini apabila tidak ingin merubah password.</h1>';
+                                $mail->Body  .='<a href="https://tiemschedule.thekingcorp.org/mail/renewMail.php?token='.$this->token.'"><button style="background-image: linear-gradient(to left, #0025BC , #0071BC); width: 100%; text-align: center; margin: auto; min-height: 40px; color: white; font-size: 30px; cursor: pointer;">Klik disini</button></a>';
+                            $mail->Body  .='</div>';
+                            $mail->Body  .='<div class="mail-footer" style="color: black; background-color: #adadad; width: 100%; font-size: 20px;padding: 20px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;" >';
+                                $mail->Body  .='<p>Apabila link tersebut bermasalah, silahkan akses url berikut: </p><br/>';
+                                $mail->Body  .='https://tiemschedule.thekingcorp.org/mail/renewMail.php?token='.$this->token.'';
+                            $mail->Body  .='</div>';
+                        $mail->Body  .='</div>';
+                    $mail->Body  .='</body>';
+                    $mail->Body  .='</html>';
+
+                    $mail->send();
+                    return true;
+                } catch (Exception $e) {
+                    return false;
+                }
+        }
+        
+        
+        
+    }
+    function resetEmailByToken(){
+        // update query
+        $query = "UPDATE
+                    " . $this->table_name . "
+                SET
+                    password=295A7AA0A627EC70:1000:6C7C846DEF0FA484BD089699747324F07D7DEED3, token=:newToken
+                WHERE
+                    token=:token";
+    
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+    
+        $this->token=htmlspecialchars(strip_tags($this->token));
+        $this->password=htmlspecialchars(strip_tags($this->password));
+
+        // bind values
+        $stmt->bindParam(":password", $this->password);
+        $stmt->bindParam(":newToken", bin2hex(random_bytes(5)));
+        $stmt->bindParam(":token", $this->token);
+    
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }
+    
+        return false;
+    }
     function readOne(){
  
         // query to read single record
@@ -343,7 +444,7 @@ class User{
         return false;
     }
 
-    function updatePasswordByToken($newToken){
+    function updatePasswordByToken(){
         // update query
         $query = "UPDATE
                     " . $this->table_name . "
@@ -356,12 +457,11 @@ class User{
         $stmt = $this->conn->prepare($query);
     
         $this->token=htmlspecialchars(strip_tags($this->token));
-        $newToken=htmlspecialchars(strip_tags($newToken));
         $this->password=htmlspecialchars(strip_tags($this->password));
 
         // bind values
         $stmt->bindParam(":password", $this->password);
-        $stmt->bindParam(":newToken", $newToken);
+        $stmt->bindParam(":newToken", bin2hex(random_bytes(5)));
         $stmt->bindParam(":token", $this->token);
     
         // execute the query
