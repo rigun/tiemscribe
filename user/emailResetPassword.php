@@ -20,9 +20,9 @@ $num = $stmt->rowCount();
 // check if more than 0 record found
 if($num>0){
  
-    if($product->login2()){
+    if($product->sendForgetPassworEmail()){
         $response["value"] = 200;
-        $response["message"] = "Email berhasil dikirim";
+        $response["message"] = $product->token;
         echo json_encode($response);
     }
         

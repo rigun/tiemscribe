@@ -212,7 +212,7 @@ class User{
                     $mail->Body  .='<body>';
                         $mail->Body  .='<div class="mail" style="margin: auto; width: 100%; max-width: 350px; text-align: center; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 30px;">';
                             $mail->Body  .='<div class="mail-header" style="color: white; background-color: #003365; width: 100%; font-size: 20px; padding: 20px; border-top-left-radius: 25px; border-top-right-radius: 25px;">';
-                                $mail->Body  .='<strong>VERIFIKASI EMAIL DARI <br/>TIEM SCHEDULE</strong>';
+                                $mail->Body  .='<strong>RESET PASSWORD <br/>TIEM SCHEDULE</strong>';
                             $mail->Body  .='</div>';
                             $mail->Body  .='<div class="mail-body" style="color: black; background-color:  #CFE7EA; width: 100%; padding: 20px;">';
                                 $mail->Body  .='<h1>Email ini digunakan untuk mereset password Anda, silahkan klik tombol dibawah untuk melakukan reset password. Abaikan pesan ini apabila tidak ingin merubah password.</h1>';
@@ -231,6 +231,8 @@ class User{
                 } catch (Exception $e) {
                     return false;
                 }
+        }else{
+            return false;
         }
         
         
