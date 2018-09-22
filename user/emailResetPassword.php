@@ -22,7 +22,7 @@ if($num>0){
  
     if($product->sendForgetPassworEmail()){
         $response["value"] = 200;
-        $response["message"] = $product->token;
+        $response["message"] = "Email berhasil dikirim";
         echo json_encode($response);
     }
         
