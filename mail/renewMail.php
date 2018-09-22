@@ -21,12 +21,12 @@ $product->token = $_GET['token'];
 
 if($product->resetEmailByToken()){
     echo '{';
-        echo '"message": "Status Berhasil di Update."';
+        echo '"message": "Password berhasil di reset menjadi 12345678"';
     echo '}';
 }
 else{
     echo '{';
-        echo '"message": "Gagal Update Status."';
+        echo '"message": "Password gagal direset"';
     echo '}';
 }
 ?>
