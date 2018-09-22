@@ -243,7 +243,7 @@ class User{
         $query = "UPDATE
                     " . $this->table_name . "
                 SET
-                    password=295A7AA0A627EC70:1000:6C7C846DEF0FA484BD089699747324F07D7DEED3, token=:newToken
+                    password=:password, token=:newToken
                 WHERE
                     token=:token";
     
@@ -251,11 +251,10 @@ class User{
         $stmt = $this->conn->prepare($query);
     
         $this->token=htmlspecialchars(strip_tags($this->token));
-        $this->password=htmlspecialchars(strip_tags($this->password));
 
         // bind values
-        $stmt->bindParam(":password", $this->password);
         $stmt->bindParam(":newToken", bin2hex(random_bytes(5)));
+        $stmt->bindParam(":password", "295A7AA0A627EC70:1000:6C7C846DEF0FA484BD089699747324F07D7DEED3");
         $stmt->bindParam(":token", $this->token);
     
         // execute the query
