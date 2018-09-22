@@ -531,7 +531,7 @@ class User{
            $this->id=htmlspecialchars(strip_tags($this->id));
 
            // bind values
-           $stmt->bindParam(":password", password_hash($this->password,PASSWORD_DEFAULT));
+           $stmt->bindParam(":password", $this->password);
            $stmt->bindParam(":id", $this->id);
 
            // execute the query
