@@ -21,9 +21,10 @@ $product->token = isset($_GET['token']) ? $_GET['token'] : die();
  
 
 if($product->updateByToken()){
-    echo '{';
-        echo '"message": "Status Berhasil di Update."';
-    echo '}';
+    echo '<h1>Verifikasi Berhasil</h1><br/>';
+    echo '<hr><br/>';
+    echo '<h2>Selamat, Email anda berhasil di verifikasi, sekarang anda sudah bisa untuk melakukan login dan menikmati fitur-fitur dari TiEm Schedule</h2>';
+
 }
 else{
     echo '{';
