@@ -36,6 +36,8 @@ if($numCatatan>0){
 else{
     $product_item=array(
         "id" => "-1",
+        "catatan" => "no data",
+        "prioritas" => "no data",
      );
      array_push($catatan_arr["result"], $product_item);
      print_r(json_encode($catatan_arr));
