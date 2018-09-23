@@ -16,11 +16,13 @@ $stmt = $product->readPrioritas();
 $num = $stmt->rowCount();
 
 // check if more than 0 record found
-if($num>0){
- 
     // products array
     $products_arr=array();
     $products_arr["result"]=array();
+
+if($num>0){
+ 
+
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
@@ -42,9 +44,15 @@ if($num>0){
 }
  
 else{
-    $response["value"] = 0;
-    $response["message"] = "Jadwal Tidak ditemukan";
-    $response["result"] = [];
-    echo json_encode($response);
+    $product_item=array(
+        "id" => "-1",
+        "jadwal" => "No data",
+        "waktu" => "No data",
+        "tanggal" => "No data",
+        "tempat" => "No data",
+        "prioritas" => "No data"
+     );
+     array_push($products_arr["result"], $product_item);
+     print_r(json_encode($products_arr));
 }
 ?>
