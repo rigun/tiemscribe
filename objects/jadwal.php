@@ -164,7 +164,7 @@ class Jadwal{
   }
     function readDate(){
         // query to read single record
-      $query = "SELECT
+      $query = "SELECT DiSTINCT
                   tanggal, id
               FROM
                   " . $this->table_name . "
