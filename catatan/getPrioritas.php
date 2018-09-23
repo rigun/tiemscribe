@@ -14,11 +14,11 @@ $catatan->id= $_POST['id'];
 // read the details of user to be edited
 $stmtCatatan = $catatan->readPrioritas();
 $numCatatan = $stmtCatatan->rowCount();
-
+$catatan_arr=array();
+$catatan_arr["result"]=array();
 // create array
 if($numCatatan>0){
-    $catatan_arr=array();
-    $catatan_arr["result"]=array();
+
 
     while ($rowCatatan = $stmtCatatan->fetch(PDO::FETCH_ASSOC)){
 
@@ -34,9 +34,10 @@ if($numCatatan>0){
     print_r(json_encode($catatan_arr));
 }
 else{
-    $response["value"] = 0;
-    $response["message"] = "Catatan Anda Tidak ditemukan";
-    $response["result"] = [];
-    echo json_encode($response);
+    $product_item=array(
+        "id" => "-1",
+     );
+     array_push($catatan_arr["result"], $product_item);
+     print_r(json_encode($catatan_arr));
 }
 ?>
